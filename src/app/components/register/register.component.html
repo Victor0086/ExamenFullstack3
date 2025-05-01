@@ -1,0 +1,95 @@
+<!-- Toast de mensajes -->
+<div class="toast-container position-fixed top-0 end-0 p-3">
+  <div
+    class="toast align-items-center text-white {{ toastColor }} border-0"
+    role="alert"
+    [class.show]="showToast"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="d-flex">
+      <div class="toast-body">
+        {{ toastMessage }}
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="showToast = false"></button>
+    </div>
+  </div>
+</div>
+
+<!-- Formulario de registro -->
+<div class="container mt-5">
+  <div class="card mx-auto p-4 shadow" style="max-width: 500px;">
+    <h2 class="text-center mb-4">Registro</h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <!-- Nombre -->
+      <div class="mb-3">
+        <label>Nombre</label>
+        <input type="text" formControlName="nombre" class="form-control" />
+        <div *ngIf="registerForm.get('nombre')?.touched && registerForm.get('nombre')?.invalid" class="text-danger">
+          El nombre es obligatorio.
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label>Correo</label>
+        <input type="email" formControlName="email" class="form-control" />
+        <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors">
+          <div *ngIf="registerForm.get('email')?.hasError('required')" class="text-danger">
+            El correo es obligatorio.
+          </div>
+          <div *ngIf="registerForm.get('email')?.hasError('email')" class="text-danger">
+            Ingresa un correo válido.
+          </div>
+        </div>
+      </div>
+
+      <!-- Contraseña -->
+      <div class="mb-3">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" class="form-control" />
+        <ul class="mt-2 small">
+          <li [class.text-success]="passwordChecks.minLength" [class.text-danger]="!passwordChecks.minLength">
+            ✔ Mínimo 8 caracteres
+          </li>
+          <li [class.text-success]="passwordChecks.hasLetter" [class.text-danger]="!passwordChecks.hasLetter">
+            ✔ Al menos una letra
+          </li>
+          <li [class.text-success]="passwordChecks.hasNumber" [class.text-danger]="!passwordChecks.hasNumber">
+            ✔ Al menos un número
+          </li>
+          <li [class.text-success]="passwordChecks.hasUppercase" [class.text-danger]="!passwordChecks.hasUppercase">
+            ✔ Una letra mayúscula (A-Z)
+          </li>
+        </ul>
+      </div>
+
+      <!-- Confirmar Contraseña -->
+      <div class="mb-3">
+        <label>Confirmar Contraseña</label>
+        <input type="password" formControlName="confirmPassword" class="form-control" />
+        <div *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.hasError('required')" class="text-danger">
+          La confirmación es obligatoria.
+        </div>
+        <div *ngIf="registerForm.hasError('passwordMismatch')" class="text-danger mt-1">
+          Las contraseñas no coinciden.
+        </div>
+      </div>
+
+      <!-- Botón -->
+      <button type="submit" class="btn btn-success w-100 mt-3">Registrarse</button>
+
+      <!-- Volver -->
+      <div class="text-center mt-3">
+        <a routerLink="/" class="btn btn-primary w-100">Volver al Inicio</a>
+      </div>
+
+      <!-- Link -->
+      <div class="text-center mt-3">
+        ¿Ya tienes cuenta? <a routerLink="/login">Iniciar sesión</a>
+      </div>
+    </form>
+  </div>
+</div>

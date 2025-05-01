@@ -1,0 +1,23 @@
+<div class="container mt-4">
+    <h2>Perfil de Usuario</h2>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="username" class="form-label">Nombre de usuario</label>
+        <input id="username" type="text" class="form-control" formControlName="username" />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo electrónico</label>
+        <input id="email" type="email" class="form-control" formControlName="email" />
+      </div>
+      <div class="mb-3">
+        <label for="role" class="form-label">Rol</label>
+        <select id="role" class="form-select" formControlName="role">
+          <option value="USER">Usuario</option>
+          <option value="ADMIN">Administrador</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled]="profileForm.invalid">
+        Guardar Cambios
+      </button>
+    </form>
+  </div>

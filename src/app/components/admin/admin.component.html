@@ -1,0 +1,41 @@
+<div class="container mt-3">
+
+    <!-- Barra superior: inicio, saludo y cerrar sesión -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <button class="btn btn-outline-primary" (click)="irAInicio()">Ir al Inicio</button>
+  
+      <div class="d-flex align-items-center gap-3">
+        <span *ngIf="usuarioLogueado">Bienvenido, <strong>{{ usuarioLogueado.username }}</strong></span>
+        <button class="btn btn-outline-danger" (click)="cerrarSesion()">Cerrar sesión</button>
+      </div>
+    </div>
+  
+    <!-- Título -->
+    <h2 class="mb-4">Panel de Administración</h2>
+  
+    <!-- Lista de temas -->
+    <div *ngFor="let tema of temas" class="card mb-3">
+      <div class="card-body">
+  
+        <!-- Modo edición -->
+        <div *ngIf="temaEnEdicion && temaEnEdicion.id === tema.id; else vistaTema">
+            <input [(ngModel)]="temaEnEdicion.titulo" class="form-control mb-2" placeholder="Título" />
+            <textarea [(ngModel)]="temaEnEdicion.contenido" class="form-control mb-2" rows="4" placeholder="Contenido"></textarea>
+            <button class="btn btn-success btn-sm me-2" (click)="guardarCambios()">Guardar</button>
+            <button class="btn btn-secondary btn-sm" (click)="cancelarEdicion()">Cancelar</button>
+        </div>
+        
+     
+  
+        <!-- Vista normal -->
+        <ng-template #vistaTema>
+          <h5 class="card-title">{{ tema.titulo }}</h5>
+          <p class="card-text">{{ tema.contenido }}</p>
+          <button class="btn btn-warning btn-sm me-2" (click)="editarTema(tema)">Editar</button>
+          <button class="btn btn-danger btn-sm" (click)="eliminarTema(tema.id)">Eliminar Tema</button>
+        </ng-template>
+  
+      </div>
+    </div>
+  </div>
+  

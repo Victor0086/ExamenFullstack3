@@ -1,0 +1,56 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
+    <h3 class="text-center mb-4">Iniciar sesión</h3>
+    
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="username" class="form-label">Usuario</label>
+        <input
+          type="text"
+          id="username"
+          class="form-control"
+          formControlName="username"
+          placeholder="Ingresa tu usuario"
+        />
+        <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="text-danger">
+          El usuario es obligatorio.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Ingresa tu contraseña"
+        />
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+          La contraseña es obligatoria.
+        </div>
+      </div>
+
+      <button class="btn btn-primary w-100" type="submit" [disabled]="loginForm.invalid">
+        Iniciar sesión
+      </button>
+
+      <div class="text-center mt-3">
+        <a routerLink="/" class="btn btn-primary w-100">Volver al Inicio</a>
+      </div>
+      <div class="text-center mt-3">
+        <span>¿No tienes cuenta?</span>
+        <a routerLink="/register" class="text-decoration-none">Crear cuenta</a>
+      </div>
+      <div class="text-center mt-3">
+        <a class="btn btn-link p-0" routerLink="/forgot-password">
+          ¿Olvidaste tu contraseña?
+        </a>
+      </div>
+      
+      
+
+    </form>
+  </div>
+</div>

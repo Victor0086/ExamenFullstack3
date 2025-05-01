@@ -1,0 +1,71 @@
+<div class="container mt-4">
+  <!-- Botón superior derecho -->
+  <div class="d-flex justify-content-end mb-3">
+    <ng-container *ngIf="usuarioLogueado; else loginButton">
+      <span class="me-2">
+        Bienvenido, <strong>{{ usuarioLogueado.username }}</strong>
+      </span>
+      <button class="btn btn-outline-danger btn-sm" (click)="cerrarSesion()">
+        Cerrar sesión
+      </button>
+    </ng-container>
+
+    <ng-template #loginButton>
+      <button class="btn btn-outline-primary btn-sm" (click)="irALogin()">
+        Iniciar sesión
+      </button>
+    </ng-template>
+  </div>
+
+  
+  
+  <div class="row">
+    <!-- Bienvenida -->
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h4>Bienvenido</h4>
+        <p>Explora los temas del foro y participa en la comunidad.</p>
+  
+        <!-- Mostrar solo si es usuario normal -->
+        <div class="text-center mt-3" *ngIf="rol === 'USER'">
+          <button class="btn btn-primary w-100" (click)="irAlForo()">
+            Ir al Foro
+          </button>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+      <!-- Categorías -->
+      <div class="col-md-4">
+        <div class="card p-3">
+          <h4>Categorías</h4>
+          <ul>
+            <li>Presentaciones</li>
+            <li>Reglamento</li>
+            <li>Juegos</li>
+            <li>Tecnología</li>
+            <li>Off-topic</li>
+          </ul>
+        </div>
+      </div>
+  
+      <!-- Noticias / Panel admin (solo si es admin) -->
+      <div class="col-md-4">
+        <div class="card p-3">
+          <h4>Noticias</h4>
+          <p>Mantente al día con las últimas novedades del foro.</p>
+  
+          <a 
+          *ngIf="usuarioLogueado?.role === 'ADMIN'" 
+          class="btn btn-outline-danger mt-2 d-block text-center"
+          routerLink="/admin">
+          Ir al Panel Admin
+          </a>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  
