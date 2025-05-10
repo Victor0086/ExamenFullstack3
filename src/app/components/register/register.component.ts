@@ -14,6 +14,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './register.component.html',
 })
 export class RegisterComponent {
+  public errorMessage: string = '';
   registerForm: FormGroup;
 
   showToast = false;
@@ -101,7 +102,7 @@ export class RegisterComponent {
       },
       error: (err) => {
         console.error('Error al crear usuario:', err);
-        this.toastMessage = 'Error al registrar usuario';
+        this.errorMessage = 'Error al registrar usuario';
         this.toastColor = 'bg-danger';
         this.showToast = true;
       }

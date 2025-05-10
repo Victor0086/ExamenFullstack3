@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
+  public mensaje: string = 'Bienvenido al foro';
   usuarioLogueado: any = null;
   rol: string = '';
 

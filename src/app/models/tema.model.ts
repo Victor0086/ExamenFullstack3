@@ -10,4 +10,5 @@ export interface Tema {
   usuario: Usuario; 
   fechaPublicacion: Date;
   comentarios: Comentario[];
+  baneado?: boolean;
 }
